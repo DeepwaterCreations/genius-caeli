@@ -1,5 +1,5 @@
 #include "OpenGLHelper.h"
-#include "Perlin.h"
+#include "GeniusCaeli.h"
 
 GLfloat vertices[] = {
 	//X,   Y,     U,    V
