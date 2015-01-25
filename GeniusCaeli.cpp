@@ -1,5 +1,19 @@
 #include "GeniusCaeli.h"
 
+//Seeded, so of course the same seed should always return the same grid. 
+void GeniusCaeli::genGrid2D(uint seed){
+	std::uniform_real_distribution<float> distribution(0.0f, 2*glm::pi<float>()); //2pi - also known as Tau. 
+	auto random = std::bind(distribution, std::default_random_engine(seed));
+	
+	for(int i = 0; i < GRIDSIZE; i++){
+		for(int j = 0; j < GRIDSIZE; j++){
+			//Pick a random number of radians between 0 and tau.  
+			float angle = random();
+			grid2D[i][j] = glm::vec2(cos(angle), sin(angle));
+		}
+	}
+};
+
 float GeniusCaeli::Perlin2D(float x, float y){
 	//I'm basing this on the algorithm described at
 	//webstaff.itn.liu.se/~stegu/TNM022-2005/perlinnoiselinks/perlin-noise-math-faq.html
