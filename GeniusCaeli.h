@@ -32,7 +32,7 @@ public:
 	
 	//Takes: The X and Y coordinates of a point on the texture's surface.
 	//Returns: A continuous, psuedorandom value from 0 to 1.
-	float Perlin2D(float x, float y);
+	float perlin2D(int x, int y);
 };
 
 #endif

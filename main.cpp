@@ -47,17 +47,40 @@ int main(int argc, char** argv){
 
 	//MAKE A NEW PERLIN NOISE GENERATOR...
 	//and somehow texture be happen?
+	GeniusCaeli geniusCaeli;
+	
+	//I'm going to populate an array and, somehow, hopefully, bring it into an OpenGL texture. I *think* that's a thing I can do.
+	GLuint tex;
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	
+	std::vector<float> perlinTexture;
+	GLint textureWidth = 256;
+	GLint textureHeight = 256;
+	for(int i = 0; i < textureHeight; ++i){
+		for(int j = 0; j < textureWidth; ++j){
+			perlinTexture.push_back(0.0f); //RED
+			perlinTexture.push_back(0.0f); //GREEN
+			perlinTexture.push_back(geniusCaeli.perlin2D(i, j)); //BLUE
+		}
+	}
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_FLOAT, perlinTexture.data());
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	
 	//Render loop
-	do{
+	while(glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && !glfwWindowShouldClose(window)){
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 		
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-	}while(glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && !glfwWindowShouldClose(window));
+	};
 	
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();

@@ -14,7 +14,7 @@ void GeniusCaeli::genGrid2D(uint seed){
 	}
 };
 
-float GeniusCaeli::Perlin2D(float x, float y){
+float GeniusCaeli::perlin2D(int x, int y){
 	//I'm basing this on the algorithm described at
 	//webstaff.itn.liu.se/~stegu/TNM022-2005/perlinnoiselinks/perlin-noise-math-faq.html
 	
@@ -37,5 +37,5 @@ float GeniusCaeli::Perlin2D(float x, float y){
 	//I'm also not so sure this isn't a task for the shader. But that does me no
 	//good if I'm trying to be language-agnostic. 
 	
-	return 0; //Hey, I said it returned a number in the range 0-1. This counts! 
+	return (grid2D[x%255][y%255]).x;
 };
