@@ -3,13 +3,13 @@
 
 GLfloat vertices[] = {
 	//X,   Y,     U,    V
-	-1.0f, 1.0f,  0.0f, 1.0f,
-	1.0f, 1.0f,  1.0f, 1.0f,
-	-1.0f, -1.0f,  0.0f, 0.0f,
+	-1.0f, 1.0f,  0.0f, 0.0f,
+	1.0f, 1.0f,  1.0f, 0.0f,
+	1.0f, -1.0f,  1.0f, 1.0f,
 	
-	1.0f, 1.0f,  1.0f, 1.0f,
-	1.0f, -1.0f,  1.0f, 0.0f,
-	-1.0f, -1.0f,  0.0f, 0.0f
+	1.0f, -1.0f,  1.0f, 1.0f,
+	-1.0f, -1.0f,  0.0f, 1.0f,
+	-1.0f, 1.0f,  0.0f, 0.0f
 };
 
 int main(int argc, char** argv){
@@ -70,6 +70,7 @@ int main(int argc, char** argv){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	
 	
 	//Render loop
 	while(glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && !glfwWindowShouldClose(window)){

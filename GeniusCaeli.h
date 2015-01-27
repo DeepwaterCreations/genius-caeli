@@ -7,6 +7,8 @@
 
 #include <functional>
 #include <random>
+#include <cmath>
+#include <iostream>
 
 #define GRIDSIZE 256
 
@@ -20,11 +22,14 @@ private:
 	
 	glm::vec2 grid2D[256][256];
 	
+	float hScale; 
+	float vScale;
+	
 	void genGrid2D(uint seed);
 	
 public:
 	
-	GeniusCaeli(){
+	GeniusCaeli():hScale(0.05f), vScale(0.05f){
 		genGrid2D(1);
 	}
 	
@@ -32,7 +37,7 @@ public:
 	
 	//Takes: The X and Y coordinates of a point on the texture's surface.
 	//Returns: A continuous, psuedorandom value from 0 to 1.
-	float perlin2D(int x, int y);
+	float perlin2D(int s, int t);
 };
 
 #endif
