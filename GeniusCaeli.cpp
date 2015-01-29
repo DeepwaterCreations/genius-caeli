@@ -62,12 +62,23 @@ float GeniusCaeli::perlin2D(int s, int t){
 	float influenceLL = glm::dot(gradLL, posLL);
 	float influenceLR = glm::dot(gradLR, posLR);
 	
-	float averageTop = (influenceUL + influenceUR)/2.0f;
-	float averageBottom = (influenceLL + influenceLR)/2.0f;
-	float average = (averageTop + averageBottom)/2.0f;
+	//I think the main value of the ease curve is that without it, crossing from one grid cell to another
+	//is a sudden discontinuity, because the influence of the far grid points is suddenly swapped for a different set.
+	//I want the influence of other grid points to approach zero as we get closer to one particular grid point.
+	//Actually, is this a thing I could even do linearly? 
+	float weightX = easeCurve(posLL.x); //Getting the gridcell space x coordinate of the point, as opposed to texture space. 
+	float topXAvg = influenceUL + weightX * (influenceUR - influenceUL); //At weight 1, this comes out to influenceUR. At 0, it's influenceUL.  
+	float bottomXAvg = influenceLL + weightX * (influenceLR - influenceLL);
+	float weightY = easeCurve(posLL.y);
+	float average = topXAvg + weightY * (bottomXAvg - topXAvg);
 	
-	//Okay... the ease curve bit is the bit I think I'm missing, but.
-	//Way to not explain this very well at all, website! Sheesh.
-	
-	return std::max(average, 0.0f);
+	//float averageTop = easeCurve(influenceUL, influenceUR); //(influenceUL + influenceUR)/2.0f;
+	//float averageBottom = easeCurve(influenceLL, influenceLR); //(influenceLL + influenceLR)/2.0f;
+	//float average = easeCurve(averageTop, averageBottom); //(averageTop + averageBottom)/2.0f;
+		
+	return average;
+};
+
+float GeniusCaeli::easeCurve(float x){
+	return (3.0f * std::pow(x, 2.0f)) - (2.0f * std::pow(x, 3.0f)); 
 };

@@ -26,6 +26,7 @@ private:
 	float vScale;
 	
 	void genGrid2D(uint seed);
+	float easeCurve(float x);
 	
 public:
 	
