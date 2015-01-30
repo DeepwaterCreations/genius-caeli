@@ -70,13 +70,9 @@ float GeniusCaeli::perlin2D(int s, int t){
 	float topXAvg = influenceUL + weightX * (influenceUR - influenceUL); //At weight 1, this comes out to influenceUR. At 0, it's influenceUL.  
 	float bottomXAvg = influenceLL + weightX * (influenceLR - influenceLL);
 	float weightY = easeCurve(posLL.y);
-	float average = topXAvg + weightY * (bottomXAvg - topXAvg);
-	
-	//float averageTop = easeCurve(influenceUL, influenceUR); //(influenceUL + influenceUR)/2.0f;
-	//float averageBottom = easeCurve(influenceLL, influenceLR); //(influenceLL + influenceLR)/2.0f;
-	//float average = easeCurve(averageTop, averageBottom); //(averageTop + averageBottom)/2.0f;
-		
-	return average;
+	float average = bottomXAvg + weightY * (topXAvg - bottomXAvg);
+			
+	return (average + 1.0f)/2.0f;
 };
 
 float GeniusCaeli::easeCurve(float x){
