@@ -13,9 +13,18 @@ do so with my blessing - assuming you're following the terms in whatever it says
 (The license file supercedes this, but in essence, I'm pretty sure I'm fine with whatever you want to do so long as
 you give me credit and, I dunno, refrain from committing moral atrocities.)
 
-USAGE: Er, nothing. It's not really at a place where it does anything. 
-I mean, you can compile it with make, I guess, so there's that. But that's basically it. At the time
-of this writing, if you run it, it'll just show a window of solid blue. Also, you need
-OpenGL and GLFW and... lessee, SOIL, even though I'm not actually using SOIL. And I think that's it? Oh, and GLEW.
-Personally, I wouldn't bother.
-I'll update this file when the code is more mature.
+
+BUILD:
+Dependencies: glew, glfw, glm, soil
+Build Dependencies: make, gcc
+Instructions: 
+-Clone this repository from github
+-Read the makefile and assure yourself that it doesn't do anything terrible to your computer. (Or take my word for it that it doesn't.)
+-Type 'make'
+-Alternately, compile it with 
+	g++ main.cpp OpenGLHelper.cpp GeniusCaeli.cpp -lGL -lGLEW -lglfw -lSOIL -std=c++11 -Wall -g
+
+USAGE:
+Run a.out. A window will open showing some perlin noise in blue and black.
+You can marvel at it for a while, or if you have better things to be getting on with in your life, you can close the window.
+More features to come. 
